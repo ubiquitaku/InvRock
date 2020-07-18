@@ -5,16 +5,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class InvRock extends JavaPlugin {
+public final class InvRock extends JavaPlugin implements Listener {
     boolean r;
     FileConfiguration config;
 
 
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new InvRock(),this);
+        getCommand("ir").setExecutor(this);
         // Plugin startup logic
         try {
             r = config.getBoolean("r");
@@ -35,7 +38,7 @@ public final class InvRock extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equals("ir")) {
-            if (sender.isOp()) {
+//            if (sender.isOp()) {
                 if (args[0].equals("on")) {
                     r = true;
                     return true;
@@ -44,7 +47,7 @@ public final class InvRock extends JavaPlugin {
                     r = false;
                     return true;
                 }
-            }
+//            }
         }
         return true;
     }
@@ -52,11 +55,10 @@ public final class InvRock extends JavaPlugin {
     @EventHandler
     public void rock(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        if (p.isOp()) {
-            return;
-        }
+//        if (p.isOp()) {
+//            return;
+//        }
         e.setCancelled(true);
-        e.setCancelled(false);
         return;
     }
 }
