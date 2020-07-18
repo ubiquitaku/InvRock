@@ -1,0 +1,6 @@
+name: InvRock
+version: ${project.version}
+main: ubiquitaku.invrock.InvRock
+api-version: 1.15
+commands:
+  ir:
