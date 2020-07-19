@@ -11,23 +11,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class InvRock extends JavaPlugin implements Listener {
     boolean r;
-    FileConfiguration config;
+//    FileConfiguration config;
 
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new InvRock(),this);
+        getServer().getPluginManager().registerEvents(this,this);
         getCommand("ir").setExecutor(this);
         // Plugin startup logic
-        try {
-            r = config.getBoolean("r");
-        } catch (NumberFormatException kaku){
-            r = false;
-            config.set("r",false);
-            System.out.println("configの値を取得できなかったためデフォルトのfalseに設定されました");
-        }
-        r = config.getBoolean("r",false);
-        saveConfig();
+//        try {
+//            r = config.getBoolean("r");
+//        } catch (NumberFormatException kaku){
+//            r = false;
+//            config.set("r",false);
+//            System.out.println("configの値を取得できなかったためデフォルトのfalseに設定されました");
+//        }
+//        r = config.getBoolean("r",false);
+//        saveConfig();
     }
 
     @Override
@@ -54,11 +54,14 @@ public final class InvRock extends JavaPlugin implements Listener {
 
     @EventHandler
     public void rock(InventoryClickEvent e) {
-        Player p = (Player) e.getWhoClicked();
+        if (r) {
+            Player p = (Player) e.getWhoClicked();
 //        if (p.isOp()) {
 //            return;
 //        }
-        e.setCancelled(true);
+            e.setCancelled(true);
+            return;
+        }
         return;
     }
 }
